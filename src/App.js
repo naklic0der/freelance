@@ -1,12 +1,17 @@
 import React from 'react'
-import './App.module.sass';
-import style from './App.module.sass'
+import {Redirect, Route, Switch} from "react-router";
+import Left from "./Component/Left/Left";
+import Right from "./Component/Right/Right";
+import Main from "./Component/Main/Main";
 
-function App() {
+const App = () => {
    return (
-      <div className={style.App}>
-         This is an Udit's portfolio boilerplate...
-      </div>
+      <Switch>
+         <Route path="/right" component={Right}/>
+         <Route path="/left" component={Left}/>
+         <Route path="/" exact component={Main}/>
+         <Redirect to={'/'}/>
+      </Switch>
    );
 }
 
