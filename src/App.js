@@ -5,7 +5,7 @@ import style from './App.module.sass'
 function App() {
    return (
       <div className={style.App}>
-         This is an portfolio boilerplate...
+         This is an Udit's portfolio boilerplate...
       </div>
    );
 }
