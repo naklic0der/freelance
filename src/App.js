@@ -1,8 +1,8 @@
 import React from 'react'
-import {Redirect, Route, Switch} from "react-router";
+import {Redirect, Route, Switch} from "react-router-dom";
+import Main from "./Component/Main/Main";
 import Left from "./Component/Left/Left";
 import Right from "./Component/Right/Right";
-import Main from "./Component/Main/Main";
 
 const App = () => {
    return (
