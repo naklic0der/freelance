@@ -5,6 +5,8 @@ import {AnimatePresence, motion} from "framer-motion"
 import Aux from "../../hoc/Aux";
 import {connect} from "react-redux";
 import Card from "../../Component/Card/Card";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faLongArrowAltLeft, faLongArrowAltRight} from "@fortawesome/free-solid-svg-icons";
 /*
 * #2c4247 dark blue
 * #ff1717 red
@@ -12,6 +14,7 @@ import Card from "../../Component/Card/Card";
 * */
 const Main = (props) => {
 
+   const resume_link = "https://drive.google.com/file/d/185wJprwXp6LJ42Gim9T5FjZgXmMpEC0W/view"
    const go_left = () => {
       props.upd_cur_loc('left')
       gsap.to('#_main', {
@@ -67,16 +70,16 @@ const Main = (props) => {
             </div>
 
             {/* Main Page*/}
-            <AnimatePresence>
-               {props.current_location === 'main' && (
-                  <motion.button
-                     initial={{opacity: 0}}
-                     animate={{opacity: 1}}
-                     exit={{opacity: 0}}
-                     transition={{duration: 2}}
-                     onClick={() => go_left()} className={style.go_left}>Left</motion.button>
-               )}
-            </AnimatePresence>
+            {props.current_location === 'main' && (
+               <motion.span
+                  initial={{opacity: 0}}
+                  animate={{opacity: 1}}
+                  transition={{duration: 2}}
+                  onClick={() => go_left()} className={style.go_left}
+               >
+                  <FontAwesomeIcon icon={faLongArrowAltLeft}/> &nbsp;&nbsp; About me
+               </motion.span>
+            )}
 
             {/* Left Page */}
             {props.current_location === 'left' && (
@@ -89,21 +92,48 @@ const Main = (props) => {
                   >
                      <Card/>
                   </motion.div>
-                  <motion.button
+                  <motion.span
                      initial={{opacity: 0}}
                      animate={{opacity: 1}}
                      transition={{duration: 2}}
-                     onClick={() => go_main()} className={style.go_main}>Main
-                  </motion.button>
+                     onClick={() => go_main()} className={style.go_main}
+                  >
+                     Main &nbsp;&nbsp; <FontAwesomeIcon icon={faLongArrowAltRight}/>
+                  </motion.span>
 
                </Aux>
             )}
          </div>
          {/* Extra stuff */}
          {props.current_location === 'left' && (
-            <div className={style.second}>
-               <p>Hey where is text</p>
-            </div>
+            <Aux>
+               <div className={style.second}>
+                  <h1>Hello,</h1>
+                  <p>My name is Udit Sethi and I am a Business Coach, and Network Marketer based out of Grand Rapids,
+                     Michigan. I am currently a student at Kendall College of Art and Design at Ferris State University,
+                     majoring in the Collaborative Design program with a minor in Digital Media. I am the core producer
+                     and
+                     creative director at Mainstay, where we are striving to tell stories through film & design.
+                  </p>
+                  <a href={resume_link} target={'_blank'}>Download my resume.</a>
+               </div>
+               <div className={style.third}>
+                  <h1>I Design <br/><span>products.</span></h1>
+                  <div className={style.data}>
+                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aperiam at, dicta dolore
+                        dolorem dolores ea earum, explicabo facere, impedit ipsa maiores molestiae mollitia numquam
+                        perferendis qui repudiandae saepe? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Distinctio nostrum perferendis quidem! Accusamus ad asperiores corporis debitis doloremque ea,
+                        earum magnam nulla omnis possimus rerum sit tempore, vel vero vitae.
+                     </p>
+                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci assumenda, atque beatae
+                        cumque cupiditate dolorum eaque, eius eveni
+                        <a href={'https://www.google.com/'} target={'_blank'}>All About My Products. &nbsp;&nbsp;
+                           <FontAwesomeIcon icon={faLongArrowAltRight}/></a>
+                     </p>
+                  </div>
+               </div>
+            </Aux>
          )}
       </div>
    )
