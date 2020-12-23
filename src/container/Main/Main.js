@@ -3,11 +3,18 @@ import {gsap, Power4} from "gsap";
 import style from './Main.module.sass'
 import {AnimatePresence, motion} from "framer-motion"
 import Aux from "../../hoc/Aux";
-import {connect} from "react-redux";
 import Card from "../../Component/Card/Card";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faLongArrowAltLeft, faLongArrowAltRight} from "@fortawesome/free-solid-svg-icons";
+import {faGripLinesVertical, faLongArrowAltLeft, faLongArrowAltRight} from "@fortawesome/free-solid-svg-icons";
 import MultiCard from "../../Component/MultiCard/MultiCard";
+import Team from "../../Component/Team/Team";
+import {Link} from "react-router-dom";
+import Refer from "../../Component/Refer/Refer";
+import {faFacebook, faInstagram, faLinkedin, faTwitter} from "@fortawesome/free-brands-svg-icons";
+import {connect} from "react-redux";
+import ReactPlayer from 'react-player'
+import start_vid from '../../assets/video/start.mp4'
+import reverse_vid from '../../assets/video/rev.mp4'
 /*
 * #2c4247 dark blue
 * #ff1717 red
@@ -24,11 +31,22 @@ const Main = (props) => {
          duration: 0.9,
          // ease: Power4.easeOut,
       })
-      gsap.to('#_main div', {
-         scale: 3,
-         delay: 1,
-         duration: 2,
-      })
+      // gsap.to('#_main div', {
+      //    scale: 3,
+      //    delay: 1,
+      //    duration: 2,
+      // })
+
+      // let starttime = 1; // start at 7 seconds
+      // let endtime = 4; // stop at 17 seconds
+      // const vid = document.querySelector('#_main div video')
+      //
+      // vid.currentTime = starttime;
+      // vid.play();
+      // setTimeout(function () {
+      //    vid.pause();
+      // }, (endtime - starttime) * 1000);
+
    }
 
    const go_main = () => {
@@ -38,15 +56,17 @@ const Main = (props) => {
          duration: 2,
          ease: Power4.easeOut,
       })
-      gsap.to('#_main div', {
-         scale: 1,
-         delay: 1,
-         duration: 2,
-      })
+      // gsap.to('#_main div', {
+      //    scale: 1,
+      //    delay: 1,
+      //    duration: 2,
+      // })
    }
 
    useEffect(() => {
       console.log(props.current_location)
+      // const vid = document.querySelector('#_main video')
+      // vid.currentTime = 1;
    })
 
    return (
@@ -55,7 +75,22 @@ const Main = (props) => {
 
             {/*Common*/}
             <div className={style.main} id={'_main'}>
-               <div></div>
+               {props.current_location === 'main' && (
+                  <ReactPlayer
+                     width="100%"
+                     playing={true}
+                     muted={true}
+                     url={reverse_vid}
+                  />
+               )}
+               {props.current_location === 'left' && (
+                  <ReactPlayer
+                     width="100%"
+                     playing={true}
+                     muted={true}
+                     url={start_vid}
+                  />
+               )}
                <AnimatePresence>
                   {props.current_location === 'main' && (
                      <motion.h1
@@ -116,10 +151,10 @@ const Main = (props) => {
                      and
                      creative director at Mainstay, where we are striving to tell stories through film & design.
                   </p>
-                  <a href={resume_link} target={'_blank'}>Download my resume.</a>
+                  <a href={resume_link} target={'_blank'} rel='noreferrer'>Download my resume.</a>
                </div>
                <div className={style.third}>
-                  <h1>I Design <br/><span>products.</span></h1>
+                  <h1>I design <br/><span>solutions.</span></h1>
                   <div className={style.data}>
                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aperiam at, dicta dolore
                         dolorem dolores ea earum, explicabo facere, impedit ipsa maiores molestiae mollitia numquam
@@ -129,13 +164,26 @@ const Main = (props) => {
                      </p>
                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A adipisci assumenda, atque beatae
                         cumque cupiditate dolorum eaque, eius eveni
-                        <a href={'https://www.google.com/'} target={'_blank'}>All About My Products. &nbsp;&nbsp;
-                           <FontAwesomeIcon icon={faLongArrowAltRight}/></a>
+                        <Refer to={'https://www.google.com/'}>All About My Products</Refer>
                      </p>
                   </div>
                </div>
                <div className={style.fourth}>
-                  <h1>I am <br/><span>Business Coach.</span></h1>
+                  <h1>I am <br/><span>Digital Entrepreneur.</span></h1>
+                  <div className={style.data}>
+                     <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aperiam at, dicta dolore
+                        dolorem dolores ea earum, explicabo facere, impedit ipsa maiores molestiae mollitia numquam
+                        perferendis qui repudiandae saepe? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Distinctio nostrum perferendis quidem! Accusamus ad asperiores corporis debitis doloremque ea,
+                        earum magnam nulla omnis possimus rerum sit tempore, vel vero vitae
+                        <Refer to={'https://www.google.com/'}>My Ideas</Refer>
+                     </p>
+                  </div>
+                  <MultiCard/>
+               </div>
+               <div className={style.fifth}>
+                  <h1>My Business<br/><span>partners.</span></h1>
                   <div className={style.data}>
                      <p>
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aperiam at, dicta dolore
@@ -143,14 +191,30 @@ const Main = (props) => {
                         perferendis qui repudiandae saepe? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         Distinctio nostrum perferendis quidem! Accusamus ad asperiores corporis debitis doloremque ea,
                         earum magnam nulla omnis possimus rerum sit tempore, vel vero vitae.
-                        <a href={'https://www.google.com/'} target={'_blank'}>My Guide. &nbsp;&nbsp;
-                           <FontAwesomeIcon icon={faLongArrowAltRight}/></a>
+                        <Link to={'/team_details'}>Know more about my Team. &nbsp;&nbsp;
+                           <FontAwesomeIcon icon={faLongArrowAltRight}/></Link>
                      </p>
                   </div>
-                  <MultiCard/>
+                  <Team/>
                </div>
-               <div className={style.fifth}>
-                  <h1>My <span>Team.</span></h1>
+               <div className={style.sixth}>
+                  <h1>I would <br/>love to<br/> connect with <br/><span>you.</span></h1>
+                  <div className={style.social}>
+                     <a href={'https://www.google.com/'} target={'_blank'} rel='noreferrer'><FontAwesomeIcon
+                        icon={faFacebook}/></a>
+                     <a href={'https://www.google.com/'} target={'_blank'} rel='noreferrer'><FontAwesomeIcon
+                        icon={faTwitter}/></a>
+                     <a href={'https://www.google.com/'} target={'_blank'} rel='noreferrer'><FontAwesomeIcon
+                        icon={faInstagram}/></a>
+                     <a href={'https://www.google.com/'} target={'_blank'} rel='noreferrer'><FontAwesomeIcon
+                        icon={faLinkedin}/></a>
+                  </div>
+                  <div className={style.footer}>&copy; Copyright &nbsp;<span> Udit Sethi &nbsp;</span> 2020 -
+                     2021,&nbsp;&nbsp;
+                     <FontAwesomeIcon icon={faGripLinesVertical}/>&nbsp;&nbsp;
+                     <a href="https://www.linkedin.com/in/naklic0der/" target='_blank' rel='noreferrer'>made by Aman
+                        Shrivastava</a>
+                  </div>
                </div>
             </Aux>
          )}
