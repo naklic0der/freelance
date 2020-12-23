@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import Card from "../../Component/Card/Card";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faLongArrowAltLeft, faLongArrowAltRight} from "@fortawesome/free-solid-svg-icons";
+import MultiCard from "../../Component/MultiCard/MultiCard";
 /*
 * #2c4247 dark blue
 * #ff1717 red
@@ -132,6 +133,24 @@ const Main = (props) => {
                            <FontAwesomeIcon icon={faLongArrowAltRight}/></a>
                      </p>
                   </div>
+               </div>
+               <div className={style.fourth}>
+                  <h1>I am <br/><span>Business Coach.</span></h1>
+                  <div className={style.data}>
+                     <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aperiam at, dicta dolore
+                        dolorem dolores ea earum, explicabo facere, impedit ipsa maiores molestiae mollitia numquam
+                        perferendis qui repudiandae saepe? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        Distinctio nostrum perferendis quidem! Accusamus ad asperiores corporis debitis doloremque ea,
+                        earum magnam nulla omnis possimus rerum sit tempore, vel vero vitae.
+                        <a href={'https://www.google.com/'} target={'_blank'}>My Guide. &nbsp;&nbsp;
+                           <FontAwesomeIcon icon={faLongArrowAltRight}/></a>
+                     </p>
+                  </div>
+                  <MultiCard/>
+               </div>
+               <div className={style.fifth}>
+                  <h1>My <span>Team.</span></h1>
                </div>
             </Aux>
          )}
