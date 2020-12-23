@@ -8,20 +8,14 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGripLinesVertical, faLongArrowAltLeft, faLongArrowAltRight} from "@fortawesome/free-solid-svg-icons";
 import MultiCard from "../../Component/MultiCard/MultiCard";
 import Team from "../../Component/Team/Team";
-import {Link} from "react-router-dom";
 import Refer from "../../Component/Refer/Refer";
 import {faFacebook, faInstagram, faLinkedin, faTwitter} from "@fortawesome/free-brands-svg-icons";
 import {connect} from "react-redux";
 import ReactPlayer from 'react-player'
 import start_vid from '../../assets/video/start.mp4'
-import reverse_vid from '../../assets/video/rev.mp4'
-/*
-* #2c4247 dark blue
-* #ff1717 red
-* #222d2f dark
-* */
-const Main = (props) => {
+import rev_vid from '../../assets/video/rev.mp4'
 
+const Main = (props) => {
    const resume_link = "https://drive.google.com/file/d/185wJprwXp6LJ42Gim9T5FjZgXmMpEC0W/view"
    const go_left = () => {
       props.upd_cur_loc('left')
@@ -29,24 +23,7 @@ const Main = (props) => {
          x: 350,
          delay: 0.28,
          duration: 0.9,
-         // ease: Power4.easeOut,
       })
-      // gsap.to('#_main div', {
-      //    scale: 3,
-      //    delay: 1,
-      //    duration: 2,
-      // })
-
-      // let starttime = 1; // start at 7 seconds
-      // let endtime = 4; // stop at 17 seconds
-      // const vid = document.querySelector('#_main div video')
-      //
-      // vid.currentTime = starttime;
-      // vid.play();
-      // setTimeout(function () {
-      //    vid.pause();
-      // }, (endtime - starttime) * 1000);
-
    }
 
    const go_main = () => {
@@ -56,17 +33,10 @@ const Main = (props) => {
          duration: 2,
          ease: Power4.easeOut,
       })
-      // gsap.to('#_main div', {
-      //    scale: 1,
-      //    delay: 1,
-      //    duration: 2,
-      // })
    }
 
    useEffect(() => {
       console.log(props.current_location)
-      // const vid = document.querySelector('#_main video')
-      // vid.currentTime = 1;
    })
 
    return (
@@ -78,9 +48,9 @@ const Main = (props) => {
                {props.current_location === 'main' && (
                   <ReactPlayer
                      width="100%"
-                     playing={true}
+                     playing={props.init}
                      muted={true}
-                     url={reverse_vid}
+                     url={!props.init ? start_vid : rev_vid}
                   />
                )}
                {props.current_location === 'left' && (
@@ -191,8 +161,7 @@ const Main = (props) => {
                         perferendis qui repudiandae saepe? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         Distinctio nostrum perferendis quidem! Accusamus ad asperiores corporis debitis doloremque ea,
                         earum magnam nulla omnis possimus rerum sit tempore, vel vero vitae.
-                        <Link to={'/team_details'}>Know more about my Team. &nbsp;&nbsp;
-                           <FontAwesomeIcon icon={faLongArrowAltRight}/></Link>
+                        <Refer to={'http://localhost:3000/team_details'}>Know more about my Team.</Refer>
                      </p>
                   </div>
                   <Team/>
@@ -227,6 +196,7 @@ const Main = (props) => {
 const mapStateToProps = (state) => {
    return {
       current_location: state.location,
+      init: state.init,
    }
 }
 

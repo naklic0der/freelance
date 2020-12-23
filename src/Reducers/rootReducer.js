@@ -1,5 +1,6 @@
 const init_state = {
    location: 'main',
+   init: false,
 }
 
 const rootReducer = (state = init_state, action) => {
@@ -7,6 +8,7 @@ const rootReducer = (state = init_state, action) => {
       return {
          ...state,
          location: action.loc,
+         init: true,
       }
    }
    return state
